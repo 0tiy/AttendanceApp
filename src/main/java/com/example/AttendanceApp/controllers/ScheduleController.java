@@ -5,6 +5,7 @@ import com.example.AttendanceApp.services.ScheduleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -48,6 +49,12 @@ public class ScheduleController {
 //            System.out.println("Adding schedule");
 //            scheduleService.saveSchedule(schedule);
 //        }
+        return "redirect:/schedule";
+    }
+
+    @PostMapping("/delete-schedule/{id}")
+    public String deleteSchedule(@PathVariable long id) {
+        scheduleService.deleteScheduleById(id);
         return "redirect:/schedule";
     }
 }

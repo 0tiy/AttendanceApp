@@ -17,6 +17,7 @@
             <th>Shift End</th>
             <th>Worked Hours</th>
             <th>Present</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -26,6 +27,9 @@
             <td th:text="${schedule.getShiftEnd}"></td>
             <td th:text="${schedule.getWorkedHours}"></td>
             <td th:text="${schedule.isPresent}"></td>
+            <td><form th:action="@{/delete-schedule/{id}(id=${schedule.getId})}" method="post">
+                <button type="submit">Delete</button>
+            </form></td>
         </tr>
         </tbody>
     </table>
