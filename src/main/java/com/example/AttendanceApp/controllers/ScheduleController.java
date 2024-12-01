@@ -36,11 +36,10 @@ public class ScheduleController {
     @PostMapping("/add-schedule")
     public String createSchedule(@RequestParam long employeeId,
                                  @RequestParam LocalDateTime shiftStart,
-                                 @RequestParam LocalDateTime shiftEnd,
-                                 @RequestParam boolean isPresent) {
+                                 @RequestParam LocalDateTime shiftEnd) {
 
         Double workedHours = scheduleService.workedHours(shiftStart,shiftEnd);
-        isPresent = scheduleService.isPresent(workedHours);
+        boolean isPresent = scheduleService.isPresent(workedHours);
         System.out.println("Received Data: " + employeeId + ", " + shiftStart + ", " + shiftEnd + ", " + workedHours + ", " + isPresent);
 
         Schedule schedule = new Schedule(employeeId, shiftStart, shiftEnd, workedHours, isPresent);
