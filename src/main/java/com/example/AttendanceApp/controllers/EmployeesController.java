@@ -1,8 +1,8 @@
 package com.example.AttendanceApp.controllers;
 
 
-import com.example.AttendanceApp.models.Employees;
-import com.example.AttendanceApp.services.EmployeesService;
+import com.example.AttendanceApp.models.Employee;
+import com.example.AttendanceApp.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,23 +11,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Objects;
-import java.util.Optional;
-
 @Controller
 public class EmployeesController {
 
-    private final EmployeesService employeesService;
+    private final EmployeeService employeesService;
 
     @Autowired
-    public EmployeesController(EmployeesService employeesService) {
+    public EmployeesController(EmployeeService employeesService) {
         this.employeesService = employeesService;
     }
 
     @GetMapping("/employees")
     public String employeesPage(Model model){
-        model.addAttribute("employees", employeesService.getEmployees());
-        return "employees";
+        model.addAttribute("employees", employeesService.getEmployee());
+        return "employee";
     }
 
     @GetMapping("/add-employee")
@@ -39,7 +36,7 @@ public class EmployeesController {
     public String createEmployee(@RequestParam String firstName,
                                  @RequestParam String lastName){
         System.out.println("Received Data: First Name = " + firstName + ", Last Name = " + lastName);
-        Employees employee = new Employees(firstName, lastName);
+        Employee employee = new Employee(firstName, lastName);
         if(employeesService.isExist(firstName, lastName)){
             employeesService.saveEmployee(employee);
         }
