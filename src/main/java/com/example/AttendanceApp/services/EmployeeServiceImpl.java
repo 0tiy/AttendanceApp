@@ -11,28 +11,28 @@ import java.util.Optional;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private final EmployeeRepository employeesRepository;
+    private final EmployeeRepository employeeRepository;
 
     public EmployeeServiceImpl(EmployeeRepository employeesRepository) {
-        this.employeesRepository = employeesRepository;
+        this.employeeRepository = employeesRepository;
     }
 
 
     @Override
     public List<Employee> getEmployee() {
-        return employeesRepository.findAll();
+        return employeeRepository.findAll();
     }
 
     @Override
     public Employee getEmployeeById(long id) {
-       return employeesRepository.findById(id).orElseThrow(
+       return employeeRepository.findById(id).orElseThrow(
                () -> new IllegalArgumentException(String.format("Location with id (%s) not found.", id))
        );
     }
 
     @Override
     public boolean isExist(String firstName, String lastname){
-        List<Employee> employees = employeesRepository.findAll();
+        List<Employee> employees = employeeRepository.findAll();
         if(employees.stream().filter(e-> Objects.equals(e.getFirstName(), firstName) && Objects.equals(e.getLastName(), lastname)).toList().isEmpty()){
             return true;
         }return false;
@@ -40,25 +40,25 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void saveEmployee(Employee employee) {
-        employeesRepository.save(employee);
+        employeeRepository.save(employee);
     }
 
     @Override
     public void deleteEmployee(Employee employee) {
-        employeesRepository.delete(employee);
+        employeeRepository.delete(employee);
     }
 
     @Override
     public void deleteById(Long id) {
-        Optional<Employee> employees = employeesRepository.findById(id);
+        Optional<Employee> employees = employeeRepository.findById(id);
         if (employees.isPresent()){
-            employeesRepository.deleteById(id);
+            employeeRepository.deleteById(id);
         }
     }
 
     @Override
     public void updateEmployeeById(long id) {
-        Optional<Employee> employees = employeesRepository.findById(id);
+        Optional<Employee> employees = employeeRepository.findById(id);
         if (employees.isPresent()){
             Employee e = employees.get();
         }
