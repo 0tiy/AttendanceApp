@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class EmployeesController {
+public class EmployeeController {
 
-    private final EmployeeService employeesService;
+    private final EmployeeService employeeService;
 
     @Autowired
-    public EmployeesController(EmployeeService employeesService) {
-        this.employeesService = employeesService;
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/employees")
-    public String employeesPage(Model model){
-        model.addAttribute("employees", employeesService.getEmployee());
+    public String employeePage(Model model){
+        model.addAttribute("employees", employeeService.getEmployee());
         return "employee";
     }
 
@@ -37,21 +37,21 @@ public class EmployeesController {
                                  @RequestParam String lastName){
         System.out.println("Received Data: First Name = " + firstName + ", Last Name = " + lastName);
         Employee employee = new Employee(firstName, lastName);
-        if(employeesService.isExist(firstName, lastName)){
-            employeesService.saveEmployee(employee);
+        if(employeeService.isExist(firstName, lastName)){
+            employeeService.saveEmployee(employee);
         }
         return "redirect:/employees";
     }
 
     @GetMapping("/about-employee/{employee}")
     public String aboutEmployeePage(Model model, @PathVariable("employee") Long employeeOrder){
-        model.addAttribute("employees", employeesService.getEmployeeById(employeeOrder));
+        model.addAttribute("employees", employeeService.getEmployeeById(employeeOrder));
         return "about-employee";
     }
 
     @GetMapping("/delete-employee/{id}")
     public String deleteEmployee(@PathVariable("id") Long employeeOrder){
-        employeesService.deleteById(employeeOrder);
+        employeeService.deleteById(employeeOrder);
         return "redirect:/employees";
     }
 }
