@@ -10,7 +10,7 @@
 <main>
     <h1>All Employees</h1>
     <div class = "leftSize">
-    <table th:if="${employees.size() > 0}">
+    <table th:if="${employee.size() > 0}">
         <thead>
         <tr>
             <th>Firstname</th>
@@ -20,7 +20,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="employee : ${employees}">
+        <tr th:each="employee : ${employee}">
             <td th:text="${employee.getFirstName()}"></td>
             <td th:text="${employee.getLastName()}"></td>
             <td><a th:href="@{/about-employee/{employee}(employee=${employee.getId})}">About</a></td>
