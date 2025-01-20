@@ -12,6 +12,7 @@
     <table th:if="${schedule.size() > 0}">
         <thead>
         <tr>
+            <th>Schedule ID</th>
             <th>Employee ID</th>
             <th>Shift Start</th>
             <th>Shift End</th>
@@ -22,6 +23,7 @@
         </thead>
         <tbody>
         <tr th:each="schedule : ${schedule}">
+            <td th:text="${schedule.getId}"></td>
             <td th:text="${schedule.getEmployeeId}"></td>
             <td th:text="${schedule.getShiftStart}"></td>
             <td th:text="${schedule.getShiftEnd}"></td>

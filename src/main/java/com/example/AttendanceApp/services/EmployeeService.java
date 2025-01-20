@@ -5,7 +5,7 @@ import com.example.AttendanceApp.models.Employee;
 import java.util.List;
 
 public interface EmployeeService {
-    boolean isExist(String firstName, String lastname);
+    boolean employeeExist(String firstName, String lastname);
 
     List<Employee> getEmployee();
 

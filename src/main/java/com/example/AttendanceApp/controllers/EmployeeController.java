@@ -2,6 +2,7 @@ package com.example.AttendanceApp.controllers;
 
 
 import com.example.AttendanceApp.models.Employee;
+import com.example.AttendanceApp.repositories.EmployeeRepository;
 import com.example.AttendanceApp.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    private final EmployeeRepository employeeRepository;
 
     @Autowired
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService, EmployeeRepository employeeRepository) {
         this.employeeService = employeeService;
+        this.employeeRepository = employeeRepository;
     }
 
     @GetMapping("/employee")
@@ -37,9 +40,10 @@ public class EmployeeController {
                                  @RequestParam String lastName){
         System.out.println("Received Data: First Name = " + firstName + ", Last Name = " + lastName);
         Employee employee = new Employee(firstName, lastName);
-        if(employeeService.isExist(firstName, lastName)){
+
+        if(!employeeService.employeeExist(firstName, lastName)){
             employeeService.saveEmployee(employee);
-        }
+        } else System.err.println("Employee already exists!");
         return "redirect:/employee";
     }
 

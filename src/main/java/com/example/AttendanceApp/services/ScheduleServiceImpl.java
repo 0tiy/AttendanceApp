@@ -1,7 +1,7 @@
 package com.example.AttendanceApp.services;
 
 import com.example.AttendanceApp.models.Schedule;
-import com.example.AttendanceApp.repositaries.ScheduleRepository;
+import com.example.AttendanceApp.repositories.ScheduleRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;

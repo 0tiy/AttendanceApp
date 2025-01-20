@@ -1,7 +1,7 @@
 package com.example.AttendanceApp.services;
 
 import com.example.AttendanceApp.models.Employee;
-import com.example.AttendanceApp.repositaries.EmployeeRepository;
+import com.example.AttendanceApp.repositories.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,11 +31,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public boolean isExist(String firstName, String lastname){
-        List<Employee> employees = employeeRepository.findAll();
-        if(employees.stream().filter(e-> Objects.equals(e.getFirstName(), firstName) && Objects.equals(e.getLastName(), lastname)).toList().isEmpty()){
-            return true;
-        }return false;
+    public boolean employeeExist(String firstName, String lastname) {
+        return employeeRepository.existsByFirstNameAndLastName(firstName, lastname);
     }
 
     @Override
