@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ScheduleService {
-    boolean scheduleExists(long employeeId, LocalDateTime shiftStart, LocalDateTime shiftEnd, Double workedHours, boolean isPresent);
+    boolean scheduleExists(long employeeId, LocalDateTime shiftStart, LocalDateTime shiftEnd);
 
     List<Schedule> getSchedule();
 

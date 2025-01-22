@@ -43,7 +43,9 @@ public class EmployeeController {
 
         if(!employeeService.employeeExist(firstName, lastName)){
             employeeService.saveEmployee(employee);
+            System.out.println("Adding employee");
         } else System.err.println("Employee already exists!");
+
         return "redirect:/employee";
     }
 

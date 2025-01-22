@@ -32,14 +32,12 @@ public class ScheduleServiceImpl implements ScheduleService{
     }
 
     @Override
-    public boolean scheduleExists(long employeeId, LocalDateTime shiftStart, LocalDateTime shiftEnd, Double workedHours, boolean isPresent) {
-        List<Schedule> schedules = scheduleRepository.findAll();
-        return schedules.stream().filter(e ->
-                        Objects.equals(e.getEmployeeId(), employeeId) &&
-                        Objects.equals(e.getShiftStart(), shiftStart) &&
-                        Objects.equals(e.getShiftEnd(), shiftEnd) &&
-                        Objects.equals(e.getWorkedHours(), workedHours) &&
-                        Objects.equals(e.isPresent(), isPresent)).toList().isEmpty();
+    public boolean scheduleExists(long employeeId, LocalDateTime shiftStart, LocalDateTime shiftEnd) {
+        return scheduleRepository.existsByEmployeeIdAndShiftStartAndShiftEnd(
+                employeeId,
+                shiftStart,
+                shiftEnd
+        );
     }
 
     @Override

@@ -40,17 +40,15 @@ public class ScheduleController {
 
         Double workedHours = scheduleService.workedHours(shiftStart,shiftEnd);
         boolean isPresent = scheduleService.isPresent(workedHours);
+        Schedule schedule = new Schedule(employeeId, shiftStart, shiftEnd, workedHours, isPresent);
+
         System.out.println("Received Data: " + employeeId + ", " + shiftStart + ", " + shiftEnd + ", " + workedHours + ", " + isPresent);
 
-        Schedule schedule = new Schedule(employeeId, shiftStart, shiftEnd, workedHours, isPresent);
-            System.out.println("Adding schedule");
+        if (!scheduleService.scheduleExists(employeeId, shiftStart, shiftEnd)) {
             scheduleService.saveSchedule(schedule);
+            System.out.println("Adding schedule");
+        } else System.err.println("Schedule already exists!");
 
-            // TODO condition - add only if it doesn't exist already
-//        if (!scheduleService.scheduleExists(employeeId, shiftStart, shiftEnd, workedHours, isPresent)) {
-//            System.out.println("Adding schedule");
-//            scheduleService.saveSchedule(schedule);
-//        }
         return "redirect:/schedule";
     }
 
