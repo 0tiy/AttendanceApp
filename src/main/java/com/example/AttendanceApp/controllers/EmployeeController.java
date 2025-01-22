@@ -1,6 +1,7 @@
 package com.example.AttendanceApp.controllers;
 
 
+import com.example.AttendanceApp.console.Printer;
 import com.example.AttendanceApp.models.Employee;
 import com.example.AttendanceApp.repositories.EmployeeRepository;
 import com.example.AttendanceApp.services.EmployeeService;
@@ -38,13 +39,13 @@ public class EmployeeController {
     @PostMapping("/add-employee")
     public String createEmployee(@RequestParam String firstName,
                                  @RequestParam String lastName){
-        System.out.println("Received Data: First Name = " + firstName + ", Last Name = " + lastName);
+        Printer.green("Received Data: First Name = " + firstName + ", Last Name = " + lastName);
         Employee employee = new Employee(firstName, lastName);
 
         if(!employeeService.employeeExist(firstName, lastName)){
             employeeService.saveEmployee(employee);
-            System.out.println("Adding employee");
-        } else System.err.println("Employee already exists!");
+            Printer.green("Adding employee");
+        } else Printer.red("Employee already exists!");
 
         return "redirect:/employee";
     }

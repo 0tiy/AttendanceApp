@@ -1,5 +1,6 @@
 package com.example.AttendanceApp.services;
 
+import com.example.AttendanceApp.console.Printer;
 import com.example.AttendanceApp.models.Schedule;
 import com.example.AttendanceApp.repositories.ScheduleRepository;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,7 @@ public class ScheduleServiceImpl implements ScheduleService{
     @Override
     public void saveSchedule(Schedule schedule) {
         scheduleRepository.save(schedule);
-        System.out.println("Schedule saved: " + schedule);
+        Printer.green("Schedule saved: " + schedule);
     }
 
     @Override

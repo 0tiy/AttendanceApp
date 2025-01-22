@@ -1,5 +1,6 @@
 package com.example.AttendanceApp.controllers;
 
+import com.example.AttendanceApp.console.Printer;
 import com.example.AttendanceApp.models.Schedule;
 import com.example.AttendanceApp.services.ScheduleService;
 import org.springframework.stereotype.Controller;
@@ -42,12 +43,12 @@ public class ScheduleController {
         boolean isPresent = scheduleService.isPresent(workedHours);
         Schedule schedule = new Schedule(employeeId, shiftStart, shiftEnd, workedHours, isPresent);
 
-        System.out.println("Received Data: " + employeeId + ", " + shiftStart + ", " + shiftEnd + ", " + workedHours + ", " + isPresent);
+        Printer.green("Received Data: " + employeeId + ", " + shiftStart + ", " + shiftEnd + ", " + workedHours + ", " + isPresent);
 
         if (!scheduleService.scheduleExists(employeeId, shiftStart, shiftEnd)) {
             scheduleService.saveSchedule(schedule);
-            System.out.println("Adding schedule");
-        } else System.err.println("Schedule already exists!");
+            Printer.green("Adding schedule");
+        } else Printer.red("Schedule already exists!");
 
         return "redirect:/schedule";
     }

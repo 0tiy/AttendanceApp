@@ -1,5 +1,6 @@
 package com.example.AttendanceApp.services;
 
+import com.example.AttendanceApp.console.Printer;
 import com.example.AttendanceApp.models.Employee;
 import com.example.AttendanceApp.repositories.EmployeeRepository;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void deleteEmployee(Employee employee) {
         employeeRepository.delete(employee);
+        Printer.green("Employee saved: " + employee);
     }
 
     @Override
