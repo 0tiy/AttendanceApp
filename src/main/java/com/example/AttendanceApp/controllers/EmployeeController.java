@@ -39,13 +39,13 @@ public class EmployeeController {
     @PostMapping("/add-employee")
     public String createEmployee(@RequestParam String firstName,
                                  @RequestParam String lastName){
-        Printer.green("Received Data: First Name = " + firstName + ", Last Name = " + lastName);
+        Printer.greenBackground("Received Data: First Name = " + firstName + ", Last Name = " + lastName);
         Employee employee = new Employee(firstName, lastName);
 
         if(!employeeService.employeeExist(firstName, lastName)){
             employeeService.saveEmployee(employee);
-            Printer.green("Adding employee");
-        } else Printer.red("Employee already exists!");
+            Printer.greenBackground("Adding employee");
+        } else Printer.redBackground("Employee already exists!");
 
         return "redirect:/employee";
     }
@@ -57,8 +57,9 @@ public class EmployeeController {
     }
 
     @GetMapping("/delete-employee/{id}")
-    public String deleteEmployee(@PathVariable("id") Long employeeOrder){
-        employeeService.deleteById(employeeOrder);
+    public String deleteEmployee(@PathVariable long id){
+        employeeService.deleteById(id);
+        Printer.yellowBackground("Employee deleted | ID: " + id);
         return "redirect:/employee";
     }
 }

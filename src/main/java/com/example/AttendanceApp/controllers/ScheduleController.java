@@ -56,6 +56,7 @@ public class ScheduleController {
     @PostMapping("/delete-schedule/{id}")
     public String deleteSchedule(@PathVariable long id) {
         scheduleService.deleteScheduleById(id);
+        Printer.yellowBackground("Schedule deleted | ID: " + id);
         return "redirect:/schedule";
     }
 }
